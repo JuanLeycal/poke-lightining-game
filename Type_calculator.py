@@ -10,7 +10,7 @@ type_names = [
     'steel',
     'fire',
     'water',
-    'grasss',
+    'grass',
     'electric',
     'psychic',
     'ice',
@@ -61,7 +61,7 @@ type_base = [
 
 
 def type_calculator(attack, types):
-    total = 0
+    total = 1
 
     for i in types:
         atk = type_names.index(attack)
@@ -70,8 +70,7 @@ def type_calculator(attack, types):
         if df_index == 0:
             return 0
         else:
-            total = total + df_index
+            total = total * df_index
         
     return total
-
 
