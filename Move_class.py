@@ -18,8 +18,7 @@ class Move(BaseModel):
             name = name.replace('  Special', '')
         self.name = name
     
-        
-    
+
 
 def parse_move(move_data: dict) -> Move:
     return Move(name=move_data['name'], type=move_data["type"]["name"],type_attack=move_data["damage_class"]["name"])
@@ -47,7 +46,8 @@ async def get_all(*ids: str):
     for result in results:
         if result:
             move = parse_move(result)
-            base.append(move)
+            if move.type_attack != 'status':
+                base.append(move)
             #print(f"{move.name} es un movimiento de tipo {move.type} de categoría {move.type_attack}")
         else:
             print(f"No hay tipo")
