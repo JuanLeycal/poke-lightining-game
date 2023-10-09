@@ -19,7 +19,7 @@ n_pkmns = []
 
 for i in range(1,1000):
     n_moves.append(str(i))
-for i in range(1,1005):
+for i in range(1,1010):
     n_pkmns.append(str(i))
 
 x = asyncio.run(mv.get_all(*n_moves))

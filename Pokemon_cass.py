@@ -50,7 +50,7 @@ async def get_all(*ids: str):
             base.append(move)
             #print(f"{move.name} es un movimiento de tipo {move.type} de categoría {move.type_attack}")
         else:
-            print(f"No hay tipo")
+            continue
 
     for i in base:
         i.correct_name()
