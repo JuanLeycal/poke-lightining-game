@@ -19,7 +19,7 @@ n_pkmns = []
 
 for i in range(1,1000):
     n_moves.append(str(i))
-for i in range(1,1010):
+for i in range(1,1008):
     n_pkmns.append(str(i))
 
 x = asyncio.run(mv.get_all(*n_moves))
@@ -27,7 +27,6 @@ y = asyncio.run(pk.get_all(*n_pkmns))
 
 
 #MAIN GUI
-
 
 
 def super_effective():
@@ -39,9 +38,9 @@ def super_effective():
 def get_moves():
     aux = []
     for i in range(4):
-        aux.append(random.randint(1, len(x)))
+        aux.append(random.randint(0, len(x)))
     
-    return aux, random.randint(1, len(y))
+    return aux, random.randint(0, len(y))
 
 
 rand, poke = get_moves()
@@ -88,10 +87,14 @@ def action_button1():
         p = generate_pkm(y,poke)
         panel1.configure(image=p)
         panel1.image = p
-            
+        clicked()
+        clicked_max()
     else:
         print("maaaaaal")
         print(x[rand[0]].type, y[poke].types)
+        window.counter -= window.counter
+        L['text'] = "Points:" + str(window.counter)
+    
     
     
 
@@ -114,9 +117,13 @@ def action_button2():
         panel1.image = p
         while(reroll(x[rand[0]].type,x[rand[1]].type,x[rand[2]].type,x[rand[3]].type,y[poke].types)):
             action_button2()
+        clicked()
+        clicked_max()
     else:
         print("maaaaaal")
         print(x[rand[1]].type, y[poke].types)
+        window.counter -= window.counter
+        L['text'] = "Points:" + str(window.counter)
     
    
 
@@ -139,9 +146,14 @@ def action_button3():
         panel1.image = p
         while(reroll(x[rand[0]].type,x[rand[1]].type,x[rand[2]].type,x[rand[3]].type,y[poke].types)):
             action_button3()
+        clicked()
+        clicked_max()
     else:
         print("maaaaaal")
         print(x[rand[2]].type, y[poke].types)
+        window.counter -= window.counter
+        L['text'] = "Points:" + str(window.counter)
+    
     
     
 def action_button4():
@@ -163,15 +175,37 @@ def action_button4():
         panel1.image = p
         while(reroll(x[rand[0]].type,x[rand[1]].type,x[rand[2]].type,x[rand[3]].type,y[poke].types)):
             action_button3()
+        clicked()
+        clicked_max()
     else:
         print("maaaaaal")
         print(x[rand[3]].type, y[poke].types)
+        window.counter -= window.counter
+        L['text'] = "Points:" + str(window.counter)
+    
 
 
 
 window = tk.Tk()
-window.geometry("1280x800")
+window.geometry("1280x830")
 
+window.counter = 0
+window.max_counter = 0
+
+def clicked_max():
+    if window.max_counter < window.counter:
+        window.max_counter += 1
+        L_max['text'] = "Max. Points:" + str(window.max_counter)
+
+def clicked():
+    window.counter += 1
+    L['text'] = "Points:" + str(window.counter)
+
+L = Label(window, text="Points:" + str(window.counter), font=("Helvetica", 25),anchor="w", justify="left")
+L.pack()
+
+L_max = Label(window, text="Max. Points:" + str(window.max_counter), font=("Helvetica", 25),anchor="w", justify="left")
+L_max.pack()
 
 photo = generate_pkm(y,poke)
 panel1 = tk.Label(window, image=photo)
