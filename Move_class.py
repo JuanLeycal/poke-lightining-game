@@ -25,7 +25,7 @@ def parse_move(move_data: dict) -> Move:
 
 async def get_move(id: str) -> dict | None:
     async with httpx.AsyncClient() as client:
-        resp = await client.get(f"https://pokeapi.co/api/v2/move/{id}")
+        resp = await client.get(f"https://pokeapi.co/api/v2/move/{id}",timeout=None)
         try:
             resp.raise_for_status()
         except httpx.HTTPStatusError as err:

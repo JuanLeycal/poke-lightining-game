@@ -17,9 +17,9 @@ n_moves = []
 n_pkmns = []
 
 
-for i in range(1,1000):
+for i in range(1000):
     n_moves.append(str(i))
-for i in range(1,1008):
+for i in range(1008):
     n_pkmns.append(str(i))
 
 x = asyncio.run(mv.get_all(*n_moves))
@@ -187,7 +187,7 @@ def action_button4():
 
 
 window = tk.Tk()
-window.geometry("1280x830")
+window.geometry("1000x820")
 
 window.counter = 0
 window.max_counter = 0
@@ -202,14 +202,17 @@ def clicked():
     L['text'] = "Points:" + str(window.counter)
 
 L = Label(window, text="Points:" + str(window.counter), font=("Helvetica", 25),anchor="w", justify="left")
-L.pack()
+L.pack(side=LEFT, padx=(50, 0))
+#L.place(relx = 0.1, rely = 0.3, anchor = W)
 
-L_max = Label(window, text="Max. Points:" + str(window.max_counter), font=("Helvetica", 25),anchor="w", justify="left")
-L_max.pack()
+L_max = Label(window, text="Max. Points:" + str(window.max_counter), font=("Helvetica", 25),anchor="e", justify="right")
+L_max.pack(side=RIGHT, padx=(0, 50))
+#L_max.place(relx = 0.1, rely = 0.3, anchor = E)
 
 photo = generate_pkm(y,poke)
 panel1 = tk.Label(window, image=photo)
-panel1.pack(side="top", fill="both", expand="no")
+#panel1.pack(side="top", fill="both", expand="no")
+panel1.place(relx = 0.5, rely = 0.3, anchor = CENTER)
 
 while(reroll(x[rand[0]].type,x[rand[1]].type,x[rand[2]].type,x[rand[3]].type,y[poke].types)):
     rand, _ = get_moves()

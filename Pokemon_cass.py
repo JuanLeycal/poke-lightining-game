@@ -23,10 +23,11 @@ def parse_move(pokemon_data: dict) -> Pokemon:
 
     return Pokemon(name=pokemon_data['name'], types=poke_types, image=pokemon_data['sprites']['other']['official-artwork']['front_default'])
 
+timeout = httpx.Timeout(10.0, read=None)
 
 async def get_pokemon(id: str) -> dict | None:
     async with httpx.AsyncClient() as client:
-        resp = await client.get(f"https://pokeapi.co/api/v2/pokemon/{id}")
+        resp = await client.get(f"https://pokeapi.co/api/v2/pokemon/{id}",timeout=None)
         try:
             resp.raise_for_status()
         except httpx.HTTPStatusError as err:
