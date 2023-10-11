@@ -94,6 +94,18 @@ def action_button1():
         print(x[rand[0]].type, y[poke].types)
         window.counter -= window.counter
         L['text'] = "Points:" + str(window.counter)
+        aux, pkm = get_moves()
+        rand, poke = aux, pkm
+        while reroll(x[rand[0]].type,x[rand[1]].type,x[rand[2]].type,x[rand[3]].type,y[poke].types):
+            aux, _ = get_moves()
+            rand = aux
+        btn1.configure(text=x[rand[0]].name)
+        btn2.configure(text=x[rand[1]].name)
+        btn3.configure(text=x[rand[2]].name)
+        btn4.configure(text=x[rand[3]].name)
+        p = generate_pkm(y,poke)
+        panel1.configure(image=p)
+        panel1.image = p
     
     
     
@@ -115,8 +127,6 @@ def action_button2():
         p = generate_pkm(y,poke)
         panel1.configure(image=p)
         panel1.image = p
-        while(reroll(x[rand[0]].type,x[rand[1]].type,x[rand[2]].type,x[rand[3]].type,y[poke].types)):
-            action_button2()
         clicked()
         clicked_max()
     else:
@@ -124,6 +134,18 @@ def action_button2():
         print(x[rand[1]].type, y[poke].types)
         window.counter -= window.counter
         L['text'] = "Points:" + str(window.counter)
+        aux, pkm = get_moves()
+        rand, poke = aux, pkm
+        while reroll(x[rand[0]].type,x[rand[1]].type,x[rand[2]].type,x[rand[3]].type,y[poke].types):
+            aux, _ = get_moves()
+            rand = aux
+        btn1.configure(text=x[rand[0]].name)
+        btn2.configure(text=x[rand[1]].name)
+        btn3.configure(text=x[rand[2]].name)
+        btn4.configure(text=x[rand[3]].name)
+        p = generate_pkm(y,poke)
+        panel1.configure(image=p)
+        panel1.image = p
     
    
 
@@ -144,8 +166,6 @@ def action_button3():
         p = generate_pkm(y,poke)
         panel1.configure(image=p)
         panel1.image = p
-        while(reroll(x[rand[0]].type,x[rand[1]].type,x[rand[2]].type,x[rand[3]].type,y[poke].types)):
-            action_button3()
         clicked()
         clicked_max()
     else:
@@ -153,6 +173,18 @@ def action_button3():
         print(x[rand[2]].type, y[poke].types)
         window.counter -= window.counter
         L['text'] = "Points:" + str(window.counter)
+        aux, pkm = get_moves()
+        rand, poke = aux, pkm
+        while reroll(x[rand[0]].type,x[rand[1]].type,x[rand[2]].type,x[rand[3]].type,y[poke].types):
+            aux, _ = get_moves()
+            rand = aux
+        btn1.configure(text=x[rand[0]].name)
+        btn2.configure(text=x[rand[1]].name)
+        btn3.configure(text=x[rand[2]].name)
+        btn4.configure(text=x[rand[3]].name)
+        p = generate_pkm(y,poke)
+        panel1.configure(image=p)
+        panel1.image = p
     
     
     
@@ -173,8 +205,6 @@ def action_button4():
         p = generate_pkm(y,poke)
         panel1.configure(image=p)
         panel1.image = p
-        while(reroll(x[rand[0]].type,x[rand[1]].type,x[rand[2]].type,x[rand[3]].type,y[poke].types)):
-            action_button3()
         clicked()
         clicked_max()
     else:
@@ -182,7 +212,18 @@ def action_button4():
         print(x[rand[3]].type, y[poke].types)
         window.counter -= window.counter
         L['text'] = "Points:" + str(window.counter)
-    
+        aux, pkm = get_moves()
+        rand, poke = aux, pkm
+        while reroll(x[rand[0]].type,x[rand[1]].type,x[rand[2]].type,x[rand[3]].type,y[poke].types):
+            aux, _ = get_moves()
+            rand = aux
+        btn1.configure(text=x[rand[0]].name)
+        btn2.configure(text=x[rand[1]].name)
+        btn3.configure(text=x[rand[2]].name)
+        btn4.configure(text=x[rand[3]].name)
+        p = generate_pkm(y,poke)
+        panel1.configure(image=p)
+        panel1.image = p
 
 
 
