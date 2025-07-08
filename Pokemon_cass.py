@@ -2,6 +2,7 @@ import asyncio
 from datetime import timedelta
 import time
 import httpx
+import aiohttp
 from pydantic import BaseModel
 
 class Pokemon(BaseModel):
@@ -25,25 +26,30 @@ def parse_move(pokemon_data: dict) -> Pokemon:
 
 timeout = httpx.Timeout(10.0, read=None)
 
-async def get_pokemon(id: str) -> dict | None:
-    async with httpx.AsyncClient() as client:
-        resp = await client.get(f"https://pokeapi.co/api/v2/pokemon/{id}",timeout=None)
-        try:
-            resp.raise_for_status()
-        except httpx.HTTPStatusError as err:
-            if err.response.status_code == 404:
+async def get_pokemon(session,pokemon_id: str) -> dict | None:
+    url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_id}"
+    try:
+        async with session.get(url) as response:
+            if response.status == 200:
+                data = await response.json()
+                name = data["name"]
+                types = [t["type"]["name"] for t in data["types"]]
+                image = data["sprites"]["front_default"]
+                return data
+            else:
+                print(f"ID {pokemon_id} no válido (HTTP {response.status})")
                 return None
-            raise
-        else:
-            return resp.json()
+    except Exception as e:
+        print(f"Error en ID {pokemon_id}: {e}")
+        return None
 
 async def get_all(*ids: str):
 
     base = []
 
-    tasks = [asyncio.create_task(get_pokemon(id)) for id in ids]
-
-    results = await asyncio.gather(*tasks)
+    async with aiohttp.ClientSession() as session:
+        tasks = [asyncio.create_task(get_pokemon(session,id)) for id in ids]
+        results = await asyncio.gather(*tasks)
 
     for result in results:
         if result:

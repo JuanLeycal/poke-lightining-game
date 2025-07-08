@@ -13,17 +13,8 @@ import tkinter.font as font
 from PIL import ImageTk, Image
 
 #GET DATA
-n_moves = []
-n_pkmns = []
-
-
-for i in range(1000):
-    n_moves.append(str(i))
-for i in range(1008):
-    n_pkmns.append(str(i))
-
-x = asyncio.run(mv.get_all(*n_moves))
-y = asyncio.run(pk.get_all(*n_pkmns))
+x = asyncio.run(mv.get_all(*map(str, range(1000))))
+y = asyncio.run(pk.get_all(*map(str, range(1008))))
 
 
 #MAIN GUI
